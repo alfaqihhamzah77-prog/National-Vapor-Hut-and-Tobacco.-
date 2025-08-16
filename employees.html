@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>لوحة الموظف</title>
+</head>
+<body>
+  <h2>واجهة الموظف</h2>
+  <input type="password" id="password" placeholder="كلمة المرور"><br><br>
+  
+  <h3>إضافة نقاط</h3>
+  <input type="text" id="empCard" placeholder="رقم الكرت">
+  <input type="number" id="purchase" placeholder="قيمة الشراء بالدولار">
+  <button onclick="addPoints()">إضافة نقاط</button>
+  <p id="addResult"></p>
+
+  <h3>صرف النقاط</h3>
+  <input type="text" id="redeemCard" placeholder="رقم الكرت">
+  <button onclick="redeemPoints()">صرف النقاط</button>
+  <p id="redeemResult"></p>
+
+  <h3>إضافة زبون جديد</h3>
+  <input type="text" id="newCard" placeholder="رقم الكرت">
+  <input type="text" id="newName" placeholder="اسم الزبون">
+  <button onclick="addCustomer()">إضافة زبون</button>
+  <p id="addCustResult"></p>
+
+<script>
+function addPoints() {
+  var card = document.getElementById('empCard').value;
+  var purchase = document.getElementById('purchase').value;
+  var pass = document.getElementById('password').value;
+  fetch('https://script.google.com/macros/s/AKfycbw7tZXbJsHnyUeDX7OJnsY-6yw_7GqKg5NVJgBRYxYYiog0I32ldWA_JbAW9D8Es97IQA/exec?action=employee&subAction=addPoints&CardID=' + card + '&purchase=' + purchase + '&password=' + pass)
+    .then(res => res.text())
+    .then(data => document.getElementById('addResult').innerText = data);
+}
+
+function redeemPoints() {
+  var card = document.getElementById('redeemCard').value;
+  var pass = document.getElementById('password').value;
+  fetch('https://script.google.com/macros/s/AKfycbw7tZXbJsHnyUeDX7OJnsY-6yw_7GqKg5NVJgBRYxYYiog0I32ldWA_JbAW9D8Es97IQA/exec?action=employee&subAction=redeem&CardID=' + card + '&password=' + pass)
+    .then(res => res.text())
+    .then(data => document.getElementById('redeemResult').innerText = data);
+}
+
+function addCustomer() {
+  var card = document.getElementById('newCard').value;
+  var name = document.getElementById('newName').value;
+  var pass = document.getElementById('password').value;
+  fetch('https://script.google.com/macros/s/AKfycbw7tZXbJsHnyUeDX7OJnsY-6yw_7GqKg5NVJgBRYxYYiog0I32ldWA_JbAW9D8Es97IQA/exec?action=employee&subAction=addCustomer&CardID=' + card + '&name=' + name + '&password=' + pass)
+    .then(res => res.text())
+    .then(data => document.getElementById('addCustResult').innerText = data);
+}
+</script>
+</body>
+</html>
