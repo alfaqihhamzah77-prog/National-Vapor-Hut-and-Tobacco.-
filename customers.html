@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>رصيد نقاط الزبون</title>
+</head>
+<body>
+  <h2>تحقق من رصيد نقاطك</h2>
+  <input type="text" id="cardID" placeholder="أدخل رقم الكرت">
+  <button onclick="checkPoints()">عرض النقاط</button>
+  <p id="result"></p>
+
+  <script>
+    function checkPoints() {
+      var card = document.getElementById('cardID').value;
+      fetch('https://script.google.com/macros/s/AKfycbw7tZXbJsHnyUeDX7OJnsY-6yw_7GqKg5NVJgBRYxYYiog0I32ldWA_JbAW9D8Es97IQA/exec?action=view&CardID=' + card)
+        .then(response => response.text())
+        .then(data => document.getElementById('result').innerText = data);
+    }
+  </script>
+</body>
+</html>
